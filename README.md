@@ -1,6 +1,6 @@
 # Inleiding-Modelleren
-Rough model of the logistics of the bus lines 401 &amp; 402 in Eindhoven/ Veldhoven.
-<a href="https://jrbemt.github.io/Inleiding-Modelleren/.">The model </a> is school project for the course: "Inleiding Modelleren". 
+Rough model of the logistics of the bus lines 401 &amp; 402 in Eindhoven/ Veldhoven.<br>
+<a href="https://jrbemt.github.io/Inleiding-Modelleren/.">The model </a> is school project for the course: "Inleiding Modelleren". <br>
 Model uses .csv files to read in data, download all files in "master/Data/" and upload them at the starting screen.
 
 The design still has multiple flaws due to a lack of time:
