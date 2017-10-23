@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="chartist-js-develop/dist/chartist.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <script src="chartist-js-develop/dist/chartist.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.13/b-1.2.4/b-html5-1.2.4/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.13/b-1.2.4/b-html5-1.2.4/datatables.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="index.css"/>
+        <link rel="stylesheet" type="text/css" href="balloon.css"/>
+
+        <script src="Scripts/Core/Util.js" type="text/javascript"></script>
+        <script src="Scripts/Core/Gui.js" type="text/javascript"></script>
+        <script src="Scripts/Core/Loader.js" type="text/javascript"></script>
+        <script src="Scripts/Core/Dag.js" type="text/javascript"></script>
+        <script src="Scripts/Core/Resultaat.js" type="text/javascript"></script>
+
+        <script src="Scripts/Distribution.js" type="text/javascript"></script>
+        <script src="Scripts/Halte.js" type="text/javascript"></script>
+        <script src="Scripts/Weg.js" type="text/javascript"></script>
+        <script src="Scripts/Traject.js" type="text/javascript"></script>
+        <script src="Scripts/Bus.js" type="text/javascript"></script>
+        <script src="Scripts/Buslijn.js" type="text/javascript"></script>
+        <script src="Scripts/Maatschappij.js" type="text/javascript"></script>
+
+        <script>
+          window.onload = function(){
+            Loader.build();
+          }
+        </script>
+    </head>
+    <body>
+      <div id="select_file_overlay" class="overlay">
+        <form id="select_file">
+          <input type="file" id="files" class="custom-file-input" name="files[]" multiple />
+          <output id="list"/>
+        </form>
+        <ol>
+          <li>
+            Gebruik chrome
+          </li>
+          <li>Druk "Betanden Kiezen"</li>
+          <li>Selecteer "trajecten.csv", "distance.csv" en "halte_scores.csv" in de map Data druk enter</li>
+        </ol>
+        <p>
+          Data files kunnen alleen geladen worden door User vanwege veiligheidsredenen
+        </p>
+      </div>
+      <div id="canv_container">
+
+        <canvas id ="canv" width="400px" height="300px">
+
+        </canvas>
+        <div id="halte_layer">
+
+        </div>
+        <div id="bus_layer">
+
+        </div>
+        <div id="graph_layer">
+          <div id="graph_bar">
+            <div id="graph_close_button" class="fa fa-close">
+
+            </div>
+          </div>
+          <div id="graph">
+
+          </div>
+        </div>
+      </div>
+
+      <div id = "controls_container">
+        <button id="results">
+          Resultaat
+        </button>
+        <div id="model_controls">
+          <div id="controls">
+            <div class="control">
+              <p>
+                Rotation
+              </p>
+              <div class="output">
+                0
+              </div>
+              <input id="rotation_slider" type="range" min="0" value="0" max="360" step="1"/>
+            </div>
+
+            <div class="control">
+              <p>
+                Stappen per minuut
+              </p>
+              <div class="output">
+                1
+              </div>
+              <input id="step_slider" type="range" min="1" value="1" max="60" step="1"/>
+            </div>
+
+            <div class="control">
+              <p>
+                Gui enabled
+              </p>
+              <input checked id="gui_button" type="checkbox"/>
+            </div>
+            <div class="spacer">
+
+            </div>
+
+          </div>
+        </div>
+        <div id="play_control">
+          <div id="show_time">00:00</div>
+          <div id="time_control">
+            <div id="start_button" class="fa fa-play-circle-o play_button">
+
+            </div>
+            <div id="refresh_button" class="fa fa-refresh play_button">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div id="results_overlay" class="overlay">
+        <div id="results_left">
+          <div id="results_graph">
+
+          </div>
+          <div id="uur_table_container">
+            <table id="uur_table" class="display">
+              <thead>
+                <tr>
+                  <th>lijnnr</th>
+                  <th>dag</th>
+                  <th>uur</th>
+                  <th>winst</th>
+                  <th>tijd gereden</th>
+                  <th>bussen geweigerd</th>
+                  <th>passagiers geweigerd</th>
+                  <th>passagiers vervoerd</th>
+                  <th>aangekomen bussen</td>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="results_right">
+          <div class="spacer">
+
+          </div>
+          <p>
+            Plot per uur
+          </p>
+          <select id="select_plot_type">
+            <option value="0">winst</option>
+            <option value="1">tijd gereden</option>
+            <option value="2">bussen geweigerd</option>
+            <option value="3">passagiers geweigerd</option>
+            <option value="4">passagiers vervoerd</option>
+            <option value="5">aangekomen bussen</option>
+          </select>
+
+          <p>
+            Winst per dag
+          </p>
+          <div id="dag_log"></div>
+          <div class="spacer">
+
+          </div>
+          <div id="result_controls">
+            <div class="control">
+              <p>
+                Plot data
+              </p>
+              <input id="plot_button" checked type="checkbox"/>
+            </div>
+
+            <div class="control">
+              <p>
+                Log dag
+              </p>
+              <input id="log_dag_button" checked type="checkbox"/>
+            </div>
+
+            <div class="control">
+              <p>
+                Log uur
+              </p>
+              <input id="log_uur_button" checked type="checkbox"/>
+            </div>
+          </div>
+          <div id="render_button_container">
+            <button id="render_table_button">Render Data</button>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,350 @@
+html,
+body {
+  margin : 0;
+  padding: 0;
+  width  : 100%;
+  height : 100%;
+
+  font-family: "Verdana", Geneva, sans-serif;
+}
+.chart {
+  width  : 1000px;
+  height : 400px;
+}
+#test {
+
+}
+.overlay{
+  position: fixed;
+  width:  100%;
+  height: 100%;
+}
+
+#select_file_overlay{
+  z-index: 10;
+  background-color: #125A7F;
+}
+#select_file_overlay ol {
+  margin-top: 20px;
+  padding-left: 20px;
+}
+#select_file_overlay li, #select_file_overlay p , #select_file_overlay form{
+  text-align: left;
+
+}
+
+#files {
+  width: 100%;
+  color: transparent;
+}
+.custom-file-input::-webkit-file-upload-button {
+ visibility: hidden;
+}
+.custom-file-input::before {
+   content: 'Bestanden Kiezen';
+   color: white;
+   display: inline-block;
+   border: 5px solid white;
+   padding: 5px 8px;
+   outline: none;
+   white-space: nowrap;
+   cursor: pointer;
+   font-weight: 700;
+   font-size: 10pt;
+}
+.custom-file-input:hover::before {
+ border-color: black;
+}
+
+#select_file {
+  color: white;
+  border: white;
+  padding: 40px;
+  border-width: 5px;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 200px;
+  border-style: solid;
+}
+
+#canv_container {
+  float: left;
+  width  : 80%;
+  height : 100%;
+  background-color: white;
+}
+
+#canv {
+  display : block;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+#halte_layer{
+  position: fixed;
+}
+#bus_layer{
+  position: fixed;
+}
+.halte {
+  width: 20px;
+  height: 20px;
+  color: white;
+  z-index: 1;
+  position: fixed;
+  cursor: pointer;
+  border-radius: 20px;
+  text-align: center;
+  text-shadow: 1px 1px 2px black;
+}
+.bus {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  z-index: 0;
+  position: fixed;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+
+#controls_container {
+  width: 20%;
+  height: 100%;
+  float: right;
+  overflow: hidden;
+  background-color: #FF9E01;
+
+}
+#controls {
+  padding: 20px;
+  height: 100%;
+  overflow-y: hidden;
+}
+#results {
+  position: absolute;
+  width: 18%;
+  height: 30px;
+  right: 20%;
+  margin: 1%;
+  z-index: 6;
+}
+
+#controls p, #results_right p{
+  padding: 2px;
+  margin: 0;
+  color: white;
+  width: 75%;
+  float: left;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+.output {
+  height: 20px;
+  width: 15%;
+  float: right;
+  padding: 2px;
+  color: white;
+  position: relative;
+  top: 0;
+  border: 2px solid;
+}
+
+#controls input[type="range"] {
+  width: 100%;
+
+}
+#controls input[type="checkbox"], #results_right input[type="checkbox"]{
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  float: right;
+  background: white;
+}
+.control{
+  height: 50px;
+}
+#play_control{
+  width: 20%;
+  height: 80px;
+  background-color: coral;
+  position: absolute;
+  bottom: 0;
+}
+#model_controls{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding-bottom: 80px;
+  display: table;
+}
+
+#show_time {
+  width: 30%;
+  float: left;
+  color: white;
+  white-space: pre;
+  background: cornflowerblue;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.play_button{
+  float: left;
+  height: 100%;
+  color: cornflowerblue;
+  width: 60px;
+  font-size: 40px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.play_button:hover{
+  color: white;
+  cursor: pointer;
+}
+#time_control {
+  width: 70%;
+  height: 100%;
+  float: right;
+}
+#graph_layer {
+
+  position: fixed;
+  width: 78%;
+  height: 400px;
+  background-color: ghostwhite;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  left: -2000px;
+  margin: 10px;
+}
+
+#graph_bar{
+  height: 30px;
+  width: 100%;
+  background: darkgray;
+}
+#graph{
+  height: 90%;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+#graph_close_button{
+  font-size: 30px;
+  font-size: 30px;
+  float: right;
+  margin-right: 6px;
+  color: black;
+  cursor: pointer;
+}
+
+#graph_close_button:hover{
+  color: orangered;
+}
+
+#results_overlay{
+  z-index: 5;
+  width: 80%;
+  background-color: ghostwhite;
+  top: 100%;
+}
+
+#results_left{
+  width: 75%;
+  height: 100%;
+  float: left;
+}
+#results_right{
+  width: 22%;
+  height: 100%;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  /*overflow-y: scroll;*/
+  float: right;
+  background-color: cornflowerblue;
+}
+@media screen and (max-height: 650px){
+  #results_right{
+      overflow-y: scroll;
+  }
+  #controls{
+    overflow-y: scroll;
+  }
+}
+
+#results_right .spacer {
+  width: 100%;
+  margin-top: 15%;
+  height: 30px;
+}
+#results_graph{
+  height: 48%;
+  width: 98%;
+  padding: 1%;
+}
+#select_plot_type {
+  width: 100%;
+  height: 25px;
+}
+#dag_log{
+  width: 100%;
+  height: 250px;
+  background-color: white;
+  margin-top: 20px;
+  overflow-y: scroll;
+  white-space: pre;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+
+#uur_table_container {
+  border: 1px solid black;
+  height: 46%;
+  width: 98%;
+  margin: 1%;
+  overflow-y: scroll;
+}
+#uur_table{
+  width: 100%;
+  border-collapse: collapse;
+}
+#uur_table th, #uur_table td{
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: small;
+}
+
+#render_table_button{
+  width: 80%;
+  height: 50px;
+  margin: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+#render_button_container{
+  position: absolute;
+  width: 22%;
+  height: 80px;
+  right: 0;
+  bottom: 0;
+  padding-left: 1.5%;
+  z-index: 5;
+  background-color: cornflowerblue;
+  margin-top: 40px;
+  padding-right: 1.5%;
+}
+#result_controls .control{
+  margin-top: 10px;
+  height: 20px;
+}
+#result_controls {
+  margin-bottom: 100px;
+}
